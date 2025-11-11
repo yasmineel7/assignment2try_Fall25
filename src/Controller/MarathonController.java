@@ -6,7 +6,13 @@ package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -15,12 +21,19 @@ import javafx.fxml.Initializable;
  */
 public class MarathonController implements Initializable {
 
+      @FXML
+    private Button playButton;
     /**
      * Initializes the controller class.
      */
+    public void initialize() {
+ 
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+}    
     
-}
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.shape.Polygon?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="267.0" fitWidth="288.0" layoutX="110.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/marathoner1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </center>
+   <bottom>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="startButton" mnemonicParsing="false" onAction="#switchToScene1" text="Button" />
+            <Label text="Label" />
+            <MediaView fitHeight="200.0" fitWidth="200.0" />
+         </children>
+      </HBox>
+   </bottom>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Polygon fill="DODGERBLUE" points="-47.0, 93.0, -78.0, 69.0, -47.0, 47.0" stroke="BLACK" strokeType="INSIDE" translateY="125.0" />
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Polygon fill="DODGERBLUE" points="-51.0, 43.0, -16.0, 64.0, -51.0, 90.0" stroke="BLACK" strokeType="INSIDE" translateX="65.0" translateY="125.0" />
+         </children>
+      </VBox>
+   </right>
+</BorderPane>
