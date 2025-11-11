@@ -14,7 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaView;
+import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
 
 /**
@@ -41,11 +43,59 @@ public class StartMarathonController implements Initializable {
     @FXML
     private Button startButton;
     
+     @FXML
+    private Polygon triangleRight;
+
+    @FXML
+    private Polygon triangleleft;
+
+    
     //other variables
     int index = 0;
-    private Image[] images = new Image[5];
+    private Image[] images = new Image[4];
     private Label lblImage;
     private FadeTransition ftrans;
+    
+    //images into the array
+    public void creationArray() {
+         for (int i = 0; i < images.length; i++) {
+            images[i] = new Image("file:images//" + i + ".jpeg");
+        }
+    }
+    
+      @FXML
+    void ImageLeft(MouseEvent event) {
+        for ( int y = 0; y < images.length; y++) {
+            Double image = Double.valueOf(images[y].toString());
+            ftrans.setOnFinished(e -> {
+                if (image == 1) {
+                    marathoners = new ImageView(images[4]);
+                }
+                
+                index = (index - 1) % 4;
+                marathoners = new ImageView(images[index]);
+           
+        });
+        }
+    }
+
+    @FXML
+    void ImageRight(MouseEvent event) {
+         for ( int y = 0; y < images.length; y++) {
+            Double image = Double.valueOf(images[y].toString());
+            ftrans.setOnFinished(e -> {
+                if (image == 5) {
+                    marathoners = new ImageView(images[1]);
+                }
+                
+                index = (index + 1) % 4;
+                marathoners = new ImageView(images[index]);
+           
+        });
+        }
+    }
+
+    
     
     public void imageTransition() {
         for (int i = 0; i < images.length; i++) {
@@ -56,7 +106,7 @@ public class StartMarathonController implements Initializable {
         
         ftrans = new FadeTransition(new Duration (2000));
         ftrans.setOnFinished(e -> {
-            index = (index + 1) % 5;
+            index = (index + 1) % 4;
             lblImage.setGraphic(new ImageView(images[index]));
         });
         
@@ -67,7 +117,7 @@ public class StartMarathonController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       imageTransition();
+       creationArray();
     }
 
 }
