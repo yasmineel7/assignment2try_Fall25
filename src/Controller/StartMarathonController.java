@@ -71,11 +71,11 @@ public class StartMarathonController implements Initializable {
                 if (image == 1) {
                     marathoners = new ImageView(images[4]);
                 }
-                
+              
                 index = (index - 1) % 4;
                 marathoners = new ImageView(images[index]);
            
-        });
+        });  
         }
     }
 
@@ -87,10 +87,9 @@ public class StartMarathonController implements Initializable {
                 if (image == 5) {
                     marathoners = new ImageView(images[1]);
                 }
-                
+                ftrans = new FadeTransition(new Duration (2000));
                 index = (index + 1) % 4;
                 marathoners = new ImageView(images[index]);
-           
         });
         }
     }
