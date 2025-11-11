@@ -12,7 +12,7 @@
    <bottom>
       <HBox spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="playButton" mnemonicParsing="false" onAction="#switchToScene2" text="Button" />
+            <Button fx:id="playButton" mnemonicParsing="false" text="Button" />
             <Button mnemonicParsing="false" text="Button" />
             <Button mnemonicParsing="false" text="Button" />
             <HBox prefHeight="100.0" prefWidth="221.0" translateX="180.0">

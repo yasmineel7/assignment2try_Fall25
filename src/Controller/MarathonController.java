@@ -21,8 +21,6 @@ import javafx.stage.Stage;
  */
 public class MarathonController implements Initializable {
 
-      @FXML
-    private Button playButton;
     /**
      * Initializes the controller class.
      */
@@ -32,7 +30,7 @@ public class MarathonController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 }    
     
