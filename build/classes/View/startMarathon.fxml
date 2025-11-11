@@ -17,7 +17,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="marathoners" fitHeight="238.0" fitWidth="247.0" layoutX="204.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="marathoners" fitHeight="262.0" fitWidth="261.0" layoutX="204.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/1.png" />
                </image>
