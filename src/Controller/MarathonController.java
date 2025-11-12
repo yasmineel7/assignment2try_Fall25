@@ -49,7 +49,7 @@ import javafx.util.Duration;
     private Button playPauseButton;
 
     @FXML
-    private Button resetButton;
+    private Button pauseButton;
 
     @FXML
     private Label runnerLabel;
@@ -69,6 +69,9 @@ import javafx.util.Duration;
      @FXML
      private ImageView runnerMoving;
      
+     @FXML
+     private Button exitButton;
+     
      //other variables
      Image[] images = new Image[2];
      Timeline animation;
@@ -78,6 +81,11 @@ import javafx.util.Duration;
      
      @FXML
      void runnerMoving(ActionEvent event) {
+         //use the transition class to animate the marathoners
+         //meassaeges with information at the end of the race (see read.me file)
+         //three button start, pause, exit
+         //update marathoner position
+         //display and determine winners
          int num = 1;
         for (int i = 0; i < images.length; i++) {
             images[i] = new Image("file:images//runner" + (num + 1) + ".png"); //right code??

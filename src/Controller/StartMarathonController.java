@@ -100,6 +100,7 @@ public class StartMarathonController implements Initializable {
     
     
     public void imageTransition() {
+        //have to automatically pass to the next runner after the delay
         for (int i = 0; i < images.length; i++) {
             images[i] = new Image("file:images//" + i + ".png");
         }

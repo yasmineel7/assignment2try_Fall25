@@ -19,6 +19,7 @@ public class Runner {
         this.distance = distance;
         this.number = number;
         this.speed = speed;
+        
     }
 
     // TODO: Add methods (e.g., update distance, reset, etc.)
