@@ -36,7 +36,6 @@ public class StartMarathonController implements Initializable {
         @FXML
     private MediaView soundRace;
 
-
     @FXML
     private Label meassageLabel;
 
@@ -94,6 +93,10 @@ public class StartMarathonController implements Initializable {
         }
     }
 
+    @FXML
+    void handleSelectMarathonAndChangeScene(ActionEvent event) {
+
+    }
     
     
     public void imageTransition() {

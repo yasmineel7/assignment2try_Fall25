@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -19,18 +20,30 @@ import javafx.stage.Stage;
  *
  * @author 6298686
  */
-public class MarathonController implements Initializable {
+    public class MarathonController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+   @FXML
+    private Label runnerLabel;
+
+    @FXML
+    private Label distanceLabel;
+
+    @FXML
+    private Button playPauseButton;
+
+    @FXML
+    private Button resetButton;
+
+    @FXML
     public void initialize() {
- 
+        // TODO: Initialize model and setup UI components
     }
+
+    // TODO: Add methods to handle button actions
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }    
     
