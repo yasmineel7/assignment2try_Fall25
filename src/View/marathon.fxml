@@ -3,22 +3,25 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MarathonController">
    <bottom>
       <HBox spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="playButton" mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Button fx:id="playPauseButton" mnemonicParsing="false" text="Play" />
+            <Button fx:id="resetButton" mnemonicParsing="false" text="Reset" />
             <Button mnemonicParsing="false" text="Button" />
             <HBox prefHeight="100.0" prefWidth="221.0" translateX="180.0">
                <children>
-                  <Label text="Label" />
-                  <Label text="Label" />
+                  <Label fx:id="runnerLabel" text="Name: " />
+                  <Label fx:id="distanceLabel" text="Distance: " />
                   <Label text="Label" />
                </children>
             </HBox>
@@ -31,9 +34,19 @@
          </BorderPane.margin></HBox>
    </bottom>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="firstLine" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: BLACK;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="204.0" fitWidth="252.0" layoutX="174.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="270.0" fitWidth="60.0" layoutX="540.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Downloads/Screenshot%202025-11-12%20131023.jpg" />
+               </image>
+            </ImageView>
+            <Line endX="542.0" endY="217.0" startX="92.0" startY="217.0" />
+            <Line fx:id="secondLine" endX="367.0" endY="31.0" layoutX="174.0" layoutY="82.0" startX="-83.0" startY="31.0" />
+            <Line fx:id="fourthLine" endX="352.0" endY="16.0" layoutX="188.0" layoutY="38.0" startX="-97.0" startY="16.0" />
+            <Rectangle fx:id="startRectangle" arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="271.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
+            <Rectangle fx:id="lineRectangle" arcHeight="5.0" arcWidth="5.0" height="274.0" layoutX="83.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="8.0" />
+            <Line fx:id="thirdLine" endX="91.0" endY="164.0" startX="541.2929077148438" startY="164.0" />
          </children>
       </Pane>
    </center>
