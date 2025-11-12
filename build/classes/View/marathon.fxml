@@ -17,8 +17,8 @@
       <HBox spacing="8.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="playPauseButton" mnemonicParsing="false" onAction="#runnerMoving" text="Play" />
-            <Button fx:id="resetButton" mnemonicParsing="false" text="Reset" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Button fx:id="pauseButton" mnemonicParsing="false" text="Pause" />
+            <Button fx:id="exitButton" mnemonicParsing="false" text="Exit" />
             <HBox prefHeight="100.0" prefWidth="221.0" translateX="180.0">
                <children>
                   <Label fx:id="runnerLabel" text="Name: " />
