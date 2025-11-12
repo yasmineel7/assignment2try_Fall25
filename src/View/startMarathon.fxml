@@ -9,17 +9,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/22" fx:controller="Controller.StartMarathonController">
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="marathoners" fitHeight="262.0" fitWidth="261.0" layoutX="204.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/1.png" />
+                  <Image url="@../images/1.png" />
                </image>
             </ImageView>
          </children>
@@ -30,7 +29,6 @@
          <children>
             <Label fx:id="marathonerChosenLabel" prefHeight="32.0" prefWidth="198.0" text="Click on the button to start the race: " translateX="50.0" />
             <Button fx:id="startButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSelectMarathonAndChangeScene" prefHeight="25.0" prefWidth="138.0" text="Marathoner chosen" translateX="50.0" />
-            <MediaView fx:id="soundRace" fitHeight="100.0" fitWidth="100.0" />
          </children>
          <padding>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -47,7 +45,7 @@
    <right>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" BorderPane.alignment="CENTER">
          <children>
-            <Polygon fx:id="triangleRight" fill="DODGERBLUE" onMouseDragged="#ImageRight" points="-51.0, 43.0, -16.0, 64.0, -51.0, 90.0" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="triangleRight" fill="DODGERBLUE" onMouseClicked="#ImageRight" points="-51.0, 43.0, -16.0, 64.0, -51.0, 90.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </VBox>
    </right>

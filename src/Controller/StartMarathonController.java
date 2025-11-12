@@ -58,7 +58,7 @@ public class StartMarathonController implements Initializable {
     //images into the array
     public void creationArray() {
          for (int i = 0; i < images.length; i++) {
-            images[i] = new Image("file:images//" + i + ".jpeg");
+            images[i] = new Image("file:images//" + i + ".png");
         }
     }
     
@@ -101,7 +101,7 @@ public class StartMarathonController implements Initializable {
     
     public void imageTransition() {
         for (int i = 0; i < images.length; i++) {
-            images[i] = new Image("file:images//" + i + ".jpeg");
+            images[i] = new Image("file:images//" + i + ".png");
         }
         
         lblImage.setGraphic(new ImageView(images[0]));
