@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
@@ -15,14 +16,14 @@
    <bottom>
       <HBox spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="playPauseButton" mnemonicParsing="false" text="Play" />
+            <Button fx:id="playPauseButton" mnemonicParsing="false" onAction="#runnerMoving" text="Play" />
             <Button fx:id="resetButton" mnemonicParsing="false" text="Reset" />
             <Button mnemonicParsing="false" text="Button" />
             <HBox prefHeight="100.0" prefWidth="221.0" translateX="180.0">
                <children>
                   <Label fx:id="runnerLabel" text="Name: " />
-                  <Label fx:id="distanceLabel" text="Distance: " />
-                  <Label text="Label" />
+                  <Label fx:id="distanceLabel" text="Distance: " translateX="-40.0" translateY="20.0" />
+                  <Label text="Label" translateX="-90.0" translateY="40.0" />
                </children>
             </HBox>
          </children>
@@ -36,17 +37,34 @@
    <center>
       <Pane fx:id="firstLine" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: BLACK;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="270.0" fitWidth="60.0" layoutX="540.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../Downloads/Screenshot%202025-11-12%20131023.jpg" />
-               </image>
-            </ImageView>
             <Line endX="542.0" endY="217.0" startX="92.0" startY="217.0" />
             <Line fx:id="secondLine" endX="367.0" endY="31.0" layoutX="174.0" layoutY="82.0" startX="-83.0" startY="31.0" />
             <Line fx:id="fourthLine" endX="352.0" endY="16.0" layoutX="188.0" layoutY="38.0" startX="-97.0" startY="16.0" />
             <Rectangle fx:id="startRectangle" arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="271.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
             <Rectangle fx:id="lineRectangle" arcHeight="5.0" arcWidth="5.0" height="274.0" layoutX="83.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="8.0" />
             <Line fx:id="thirdLine" endX="91.0" endY="164.0" startX="541.2929077148438" startY="164.0" />
+            <VBox layoutX="28.0" layoutY="61.0" prefHeight="145.0" prefWidth="28.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="15.0" text="S" />
+                  <Label text="T" />
+                  <Label text="A" />
+                  <Label text="R" />
+                  <Label text="T" />
+               </children>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </VBox>
+            <ImageView fx:id="endRace" fitHeight="308.0" fitWidth="60.0" layoutX="541.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Screenshot%202025-11-12%20131023.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="runnerMoving" fitHeight="48.0" fitWidth="44.0" layoutX="92.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/runner1.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </center>
