@@ -11,19 +11,28 @@ public class Runner {
     private double distance;
     private int number;
     private double speed;
-    private double  X;
-    private double Y;
     private boolean isWinner;
     private boolean isUserSelected;
+    private Runner marathoner1;
+    private Runner marathoner2;
+    private Runner marathoner3;
+    private Runner marathoner4;
+    private Runner marathoner5; 
 
-    public Runner(String name, double distance, int number, double speed, double X, double Y) {
+    public Runner(String name, double distance, int number, double speed) {
         this.name = name;
         this.distance = distance;
         this.number = number;
         this.speed = speed;
-        this.X = X;
-        this.Y = Y;
         
+    }
+    
+    public void initilaizeMarathoners() {
+        marathoner1 = new Runner("Sam Smith", 100.0, 10, 5.0);
+        marathoner2 = new Runner("Luc Tremblay", 100.0, 1, 5.0);
+        marathoner3 = new Runner("Lucie C.", 100.0, 3, 5.0);
+        marathoner4 = new Runner("Max G.", 100.0, 7, 5.0);
+        marathoner5 = new Runner("Marc F.", 100.0, 5, 5.0);
     }
 
     // TODO: Add methods (e.g., update distance, reset, etc.)
