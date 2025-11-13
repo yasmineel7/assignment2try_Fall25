@@ -5,10 +5,19 @@
 package Controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
+import javafx.animation.PathTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,7 +46,10 @@ import javafx.util.Duration;
     private Label distanceLabel;
 
     @FXML
-    private Pane firstLine;
+    private Pane pane;
+    
+    @FXML
+    private Line firstLine;
 
     @FXML
     private Line fourthLine;
@@ -63,71 +75,126 @@ import javafx.util.Duration;
     @FXML
     private Line thirdLine;
     
+      @FXML
+    private Line fifthLine;
+    
      @FXML
     private ImageView endRace;
      
      @FXML
-     private ImageView runnerMoving;
+     private ImageView runnerMoving1;
+
+    @FXML
+    private ImageView runnerMoving2;
+
+    @FXML
+    private ImageView runnerMoving3;
+
+    @FXML
+    private ImageView runnerMoving4;
+
+    @FXML
+    private ImageView runnerMoving5;
+
      
      @FXML
      private Button exitButton;
      
+     @FXML
+    private ImageView marathoners;
+     
+      @FXML
+    private Pane startRace;
+      
+      @FXML
+    private Label greetingLabel;
+     
      //other variables
-     Image[] images = new Image[2];
-     Timeline animation;
-     Timeline runCycleAnimation;
+     Image[] images = new Image[3];
+     PathTransition path;
+     SequentialTransition seq;
+     SequentialTransition seq1;
+     Label lblImage = new Label();
+     List<Image> images1;
+     ParallelTransition fullRun;
      int index = 0;
      double startX;
      
      @FXML
      void runnerMoving(ActionEvent event) {
-         //use the transition class to animate the marathoners
-         //meassaeges with information at the end of the race (see read.me file)
-         //three button start, pause, exit
-         //update marathoner position
-         //display and determine winners
-         int num = 1;
-        for (int i = 0; i < images.length; i++) {
-            images[i] = new Image("file:images//runner" + (num + 1) + ".png"); //right code??
-            runnerMoving = new ImageView(images[i]);
-            KeyFrame frame1 = new KeyFrame(Duration.seconds(5), new KeyValue(runnerMoving.layoutXProperty(), 70));
-           KeyFrame frame2 = new KeyFrame(Duration.seconds(2), new KeyValue(runnerMoving.layoutXProperty(), 200));
-            animation = new Timeline(frame1, frame2);
-           
-      
-        animation.play();
-        }
-//         if (animation != null) {
-//             animation.stop();
-//         }
-//         if (runCycleAnimation != null) {
-//             runCycleAnimation.stop();
-//         }
-//         
-//         
-//         double endX = 500.0;
-//         
-//         KeyValue keyValue = new KeyValue(runnerMoving.layoutXProperty(), endX);
-//         KeyFrame keyframe = new KeyFrame(Duration.seconds(10), keyValue);
-//         
-//         animation = new Timeline(keyframe);
-//         animation.setCycleCount(1);
-//         
-//         KeyFrame imageKeyFrame = new KeyFrame(Duration.seconds(0.1), e -> {
-//             index = (index + 1) % images.length;
-//             runnerMoving.setImage(images[index]);
-//         });
-//         
-//         runCycleAnimation = new Timeline(imageKeyFrame);
-//         runCycleAnimation.setCycleCount(Timeline.INDEFINITE);
-//         
-//         animation.setOnFinished(e -> runCycleAnimation.stop());
-//         
-//         animation.play();
-//         runCycleAnimation.play();
-//         
+         //to not see the marathoners anymore
+         startRace.setVisible(false);
+         
+        // Load running frames
+        List<Image> runnerFrames = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+        runnerFrames.add(new Image(getClass().getResource("/images/runner" + i + ".png").toExternalForm()));
+           }
+
+        // Create an ImageView for the runner
+        runnerMoving1 = new ImageView(runnerFrames.get(0));
+        runnerMoving1.setFitWidth(50);
+        runnerMoving1.setFitHeight(50);
+        pane.getChildren().add(runnerMoving1); // racePane is your main Pane in FXML
+
+        // Create path movement
+        PathTransition moveRunner = new PathTransition();
+        moveRunner.setNode(runnerMoving1);
+        moveRunner.setPath(firstLine); // your line/path variable
+        moveRunner.setDuration(Duration.seconds(10));
+        moveRunner.setCycleCount(1);
+
+        // Create animation for changing images
+        final int[] index = {0};
+        Timeline frameAnimation = new Timeline(
+        new KeyFrame(Duration.millis(120), e -> {
+        index[0] = (index[0] + 1) % runnerFrames.size();
+        runnerMoving1.setImage(runnerFrames.get(index[0]));
+        })
+        );
+        frameAnimation.setCycleCount(Animation.INDEFINITE);
+
+        // Combine both animations
+        fullRun = new ParallelTransition(moveRunner, frameAnimation);
+        fullRun.play();
+
+
 
      }
+     
+     /**
+      * to stop the runners after they started the race
+      * @param event the event happening
+      */
+       @FXML
+    void runnerStop(ActionEvent event) {
+        fullRun.stop();
+    }
+    
+    /**
+     * Do the transition between all the marathoners of the simulation
+     */
+    private void marathonersTransition() {
+        FadeTransition ftrans;
+        FadeTransition ftIn;
+        
+        ftrans = new FadeTransition(new Duration(2000), marathoners);
+        ftrans.setFromValue(1.0);
+        ftrans.setToValue(0.0);
+        ftrans.setOnFinished(e -> {
+        index = (index + 1) % images1.size();
+        marathoners.setImage(images1.get(index));
+        });
+         
+        ftIn = new FadeTransition(new Duration(2000), marathoners);
+        ftIn.setFromValue(0.0);
+       ftIn.setToValue(1.0);
+      
+        
+       seq1 = new SequentialTransition(ftrans, ftIn);
+       seq1.setCycleCount(Animation.INDEFINITE);
+       seq1.play();
+    }
 
     @FXML
     public void initialize() {
@@ -138,17 +205,18 @@ import javafx.util.Duration;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        try {
-//            images[0] = new Image("file:images//runner1.png");
-//            images[1] = new Image("file:images//runner2.png");
-//            
-//            if (runnerMoving != null) {
-//                startX = runnerMoving.getLayoutX();
-//                runnerMoving.setImage(images[0]);
-//            }
-//        } catch (Exception e) {
-//            System.out.println("error" + e.getMessage());
-//    }
+       images1 = new ArrayList();
+       images1.add(new Image(getClass().getResource("/images/1.png").toExternalForm()));
+       images1.add(new Image(getClass().getResource("/images/2.png").toExternalForm()));
+       images1.add(new Image(getClass().getResource("/images/3.png").toExternalForm()));
+       images1.add(new Image(getClass().getResource("/images/4.png").toExternalForm()));
+       images1.add(new Image(getClass().getResource("/images/5.png").toExternalForm()));
+       marathoners.setImage(images1.get(0));
+       
+       PauseTransition pause = new PauseTransition(Duration.seconds(1));
+       pause.setOnFinished(e -> marathonersTransition());
+       pause.play();
+    
     }
 }    
     
