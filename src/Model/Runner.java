@@ -7,22 +7,30 @@ package model;
 import java.util.Objects;
 
 public class Runner {
-    // TODO: Define attributes (e.g., name, speed, distance)
-    // TODO: Add constructors, getters, and setters
     private String name;
     private double distance;
     private int number;
     private double speed;
+    private double  X;
+    private double Y;
+    private boolean isWinner;
+    private boolean isUserSelected;
 
-    public Runner(String name, double distance, int number, double speed) {
+    public Runner(String name, double distance, int number, double speed, double X, double Y) {
         this.name = name;
         this.distance = distance;
         this.number = number;
         this.speed = speed;
+        this.X = X;
+        this.Y = Y;
         
     }
 
     // TODO: Add methods (e.g., update distance, reset, etc.)
+    
+    public void reset() {
+        
+    }
 
     @Override
     public int hashCode() {
