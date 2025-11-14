@@ -14,9 +14,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MarathonController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MarathonController">
    <bottom>
-      <HBox spacing="8.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="119.0" prefWidth="684.0" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="playPauseButton" mnemonicParsing="false" onAction="#runnerMoving" text="Play" />
             <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#runnerStop" text="Pause" />
@@ -38,64 +38,74 @@
          </BorderPane.margin></HBox>
    </bottom>
    <center>
-      <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: BLACK;" BorderPane.alignment="CENTER">
+      <Pane fx:id="pane" prefHeight="374.0" prefWidth="676.0" style="-fx-border-color: BLACK;" BorderPane.alignment="CENTER">
          <children>
-            <Line fx:id="fourthLine" endX="542.0" endY="217.0" startX="92.0" startY="217.0" />
-            <Line fx:id="fifthLine" endX="541.0" endY="266.0" startX="92.0" startY="266.0" />
-            <Line fx:id="secondLine" endX="367.0" endY="31.0" layoutX="174.0" layoutY="82.0" startX="-83.0" startY="31.0" />
-            <Line fx:id="thirdLine" endX="549.0" endY="163.0" startX="92.0" startY="163.0" />
-            <Line fx:id="firstLine" endX="352.0" endY="16.0" layoutX="188.0" layoutY="38.0" startX="-97.0" startY="16.0" />
-            <Rectangle fx:id="startRectangle" arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="271.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
-            <Rectangle fx:id="lineRectangle" arcHeight="5.0" arcWidth="5.0" height="274.0" layoutX="83.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="8.0" />
-            <VBox layoutX="28.0" layoutY="61.0" prefHeight="145.0" prefWidth="28.0" spacing="10.0">
+            <Line fx:id="fourthLine" endX="630.0" endY="270.0" startX="91.0" startY="270.0" />
+            <Line fx:id="fifthLine" endX="627.0" endY="336.0" startX="95.0" startY="336.0" />
+            <Line fx:id="secondLine" endX="459.0" endY="44.0" layoutX="174.0" layoutY="82.0" startX="-85.0" startY="44.0" />
+            <Line fx:id="thirdLine" endX="629.0" endY="202.0" startX="93.0" startY="202.0" />
+            <Line fx:id="firstLine" endX="455.0" endY="16.0" layoutX="188.0" layoutY="38.0" startX="-97.0" startY="16.0" />
+            <Rectangle fx:id="startRectangle" arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="364.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
+            <Rectangle fx:id="lineRectangle" arcHeight="5.0" arcWidth="5.0" height="369.0" layoutX="83.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+            <VBox layoutX="25.0" layoutY="17.0" prefHeight="306.0" prefWidth="34.0" spacing="35.0">
                <children>
-                  <Label prefHeight="21.0" prefWidth="15.0" text="S" />
-                  <Label text="T" />
-                  <Label text="A" />
-                  <Label text="R" />
-                  <Label text="T" />
+                  <Label prefHeight="21.0" prefWidth="15.0" text="S">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
+                  <Label text="T">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
+                  <Label text="A">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
+                  <Label text="R">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
+                  <Label text="T">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
                </children>
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </VBox>
-            <ImageView fx:id="runnerMoving4" fitHeight="50.0" fitWidth="48.0" layoutX="93.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="runnerMoving4" fitHeight="68.0" fitWidth="61.0" layoutX="91.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/runner1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="endRace" fitHeight="308.0" fitWidth="60.0" layoutX="541.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="endRace" fitHeight="365.0" fitWidth="95.0" layoutX="618.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Screenshot%202025-11-12%20131023.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="runnerMoving3" fitHeight="47.0" fitWidth="52.0" layoutX="92.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="runnerMoving3" fitHeight="84.0" fitWidth="62.0" layoutX="91.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/runner1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="runnerMoving2" fitHeight="51.0" fitWidth="54.0" layoutX="92.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="runnerMoving2" fitHeight="79.0" fitWidth="66.0" layoutX="89.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/runner1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="runnerMoving1" fitHeight="48.0" fitWidth="44.0" layoutX="92.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="runnerMoving1" fitHeight="77.0" fitWidth="65.0" layoutX="92.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/runner1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="runnerMoving5" fitHeight="48.0" fitWidth="51.0" layoutX="92.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="runnerMoving5" fitHeight="67.0" fitWidth="59.0" layoutX="95.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/runner1.png" />
                </image>
             </ImageView>
             <Pane fx:id="startRace" layoutX="341.0" layoutY="18.0" prefHeight="243.0" prefWidth="160.0" style="-fx-background-color: white;">
                <children>
-                  <ImageView fx:id="marathoners" fitHeight="229.0" fitWidth="200.0" layoutX="152.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/1.png" />
-                     </image>
-                  </ImageView>
                   <Label fx:id="greetingLabel" style="-fx-background-color: white;" text="Welcome to the JavaFX simulation!">
                      <font>
                         <Font size="18.0" />
@@ -106,6 +116,11 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </Pane>
+            <ImageView fx:id="marathoners" fitHeight="229.0" fitWidth="200.0" layoutX="421.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/1.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </center>
