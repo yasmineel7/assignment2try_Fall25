@@ -4,10 +4,25 @@
  */
 package Model;
 
+import java.util.List;
+
 /**
  *
  * @author yasmi
  */
 public class modelRunner {
+    //private List<Runner> runners;
+//    private Runner runner1;
+//    private Runner runner2;
+//    private Runner runner3;
+//    private Runner runner4;
+//    private Runner runner5;
+//   
+//    public void initializeRunner() {
+//        runner1 = new Runner();
+//        
+//      //  runners.add(runner1);
+//    }
+    
     
 }

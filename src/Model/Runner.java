@@ -8,44 +8,38 @@ import java.util.Objects;
 
 public class Runner {
     private String name;
-    private double distance;
+    private double position;
     private int number;
     private double speed;
     private boolean isWinner;
     private boolean isUserSelected;
-    private Runner marathoner1;
-    private Runner marathoner2;
-    private Runner marathoner3;
-    private Runner marathoner4;
-    private Runner marathoner5; 
+    
 
     public Runner(String name, double distance, int number, double speed) {
         this.name = name;
-        this.distance = distance;
+        this.position = distance;
         this.number = number;
         this.speed = speed;
+        this.isWinner = false;
         
     }
     
-    public void initilaizeMarathoners() {
-        marathoner1 = new Runner("Sam Smith", 100.0, 10, 5.0);
-        marathoner2 = new Runner("Luc Tremblay", 100.0, 1, 5.0);
-        marathoner3 = new Runner("Lucie C.", 100.0, 3, 5.0);
-        marathoner4 = new Runner("Max G.", 100.0, 7, 5.0);
-        marathoner5 = new Runner("Marc F.", 100.0, 5, 5.0);
-    }
 
-    // TODO: Add methods (e.g., update distance, reset, etc.)
+    // TODO: Add methods (e.g., update position, reset, etc.)
     
     public void reset() {
         
+    }
+    
+    public void currentPosition() {
+        this
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 71 * hash + Objects.hashCode(this.name);
-        hash = 71 * hash + (int) (Double.doubleToLongBits(this.distance) ^ (Double.doubleToLongBits(this.distance) >>> 32));
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.position) ^ (Double.doubleToLongBits(this.position) >>> 32));
         hash = 71 * hash + this.number;
         hash = 71 * hash + (int) (Double.doubleToLongBits(this.speed) ^ (Double.doubleToLongBits(this.speed) >>> 32));
         return hash;
@@ -63,7 +57,7 @@ public class Runner {
             return false;
         }
         final Runner other = (Runner) obj;
-        if (Double.doubleToLongBits(this.distance) != Double.doubleToLongBits(other.distance)) {
+        if (Double.doubleToLongBits(this.position) != Double.doubleToLongBits(other.position)) {
             return false;
         }
         if (this.number != other.number) {
@@ -83,12 +77,12 @@ public class Runner {
         this.name = name;
     }
 
-    public double getDistance() {
-        return distance;
+    public double getPosition() {
+        return position;
     }
 
-    public void setDistance(double distance) {
-        this.distance = distance;
+    public void setPosition(double position) {
+        this.position = position;
     }
 
     public int getNumber() {
