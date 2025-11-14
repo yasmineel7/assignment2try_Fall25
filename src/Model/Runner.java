@@ -31,10 +31,10 @@ public class Runner {
         
     }
     
-    public void currentPosition() {
-        this
+    public void updatePosition() {
+        this.position += this.speed * (Math.random());
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -100,5 +100,15 @@ public class Runner {
     public void setSpeed(double speed) {
         this.speed = speed;
     }
+
+    public boolean isIsWinner() {
+        return isWinner;
+    }
+
+    public void setIsWinner(boolean isWinner) {
+        this.isWinner = isWinner;
+    }
+    
+    
     
 }
