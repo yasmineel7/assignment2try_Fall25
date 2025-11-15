@@ -53,6 +53,10 @@ public class ModelRunner {
         
     }
     
+    public Runner getRunnerbyNumber(int number) {
+        return (Runner) runners.stream().filter(r -> r.getNumber() == number);
+    }
+    
     /**
      * rest the speed of the runner
      */
