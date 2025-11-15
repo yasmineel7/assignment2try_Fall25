@@ -10,7 +10,7 @@ public class Runner {
     private String name;
     private double position;
     private int number;
-    private double speed;
+    private double baseSpeed;
     private boolean isWinner;
     private boolean isUserSelected;
     
@@ -19,7 +19,7 @@ public class Runner {
         this.name = name;
         this.position = 0;
         this.number = number;
-        this.speed = speed;
+        this.baseSpeed = speed;
         this.isWinner = false;
         
     }
@@ -36,7 +36,7 @@ public class Runner {
     }
     
     public void updatePosition() {
-        this.position += this.speed * (Math.random());
+        this.position += this.baseSpeed * (Math.random());
     }
     
     @Override
@@ -45,7 +45,7 @@ public class Runner {
         hash = 71 * hash + Objects.hashCode(this.name);
         hash = 71 * hash + (int) (Double.doubleToLongBits(this.position) ^ (Double.doubleToLongBits(this.position) >>> 32));
         hash = 71 * hash + this.number;
-        hash = 71 * hash + (int) (Double.doubleToLongBits(this.speed) ^ (Double.doubleToLongBits(this.speed) >>> 32));
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.baseSpeed) ^ (Double.doubleToLongBits(this.baseSpeed) >>> 32));
         return hash;
     }
 
@@ -67,7 +67,7 @@ public class Runner {
         if (this.number != other.number) {
             return false;
         }
-        if (Double.doubleToLongBits(this.speed) != Double.doubleToLongBits(other.speed)) {
+        if (Double.doubleToLongBits(this.baseSpeed) != Double.doubleToLongBits(other.baseSpeed)) {
             return false;
         }
         return Objects.equals(this.name, other.name);
@@ -97,12 +97,12 @@ public class Runner {
         this.number = number;
     }
 
-    public double getSpeed() {
-        return speed;
+    public double getBaseSpeed() {
+        return baseSpeed;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
+    public void setBaseSpeed(double baseSpeed) {
+        this.baseSpeed = baseSpeed;
     }
 
     public boolean isIsWinner() {
