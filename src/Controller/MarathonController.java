@@ -102,8 +102,7 @@ import javafx.util.Duration;
 
     @FXML
     private ImageView runnerMoving5;
-
-     
+    
      @FXML
      private Button exitButton;
      
@@ -127,6 +126,8 @@ import javafx.util.Duration;
      SequentialTransition seq;
      SequentialTransition seq1;
      PauseTransition pause;
+     
+     //
      Label lblImage = new Label();
      List<Image> images1;
      ParallelTransition fullRun;
@@ -242,6 +243,11 @@ import javafx.util.Duration;
 //        Media media = new Media(sound1);
 //        mediaPlayer = new MediaPlayer(media);
 //        mediaPlayer.setAutoPlay(true);
+
+        String soundFile = getClass().getResource("/sound/soundRace.mp3").toExternalForm();
+        Media sound = new Media(soundFile);
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
         
         FadeTransition ftrans;
         FadeTransition ftIn;
