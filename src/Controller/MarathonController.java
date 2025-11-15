@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.ModelRunner;
+import Model.Runner;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -51,70 +52,28 @@ import javafx.util.Duration;
     public class MarathonController implements Initializable {
 
   @FXML
-    private Label distanceLabel;
+    private Label distanceLabel, runnerLabel, greetingLabel;
 
     @FXML
-    private Pane pane;
+    private Pane pane, startRace;
     
     @FXML
-    private Line firstLine;
-
-    @FXML
-    private Line fourthLine;
+    private Line firstLine, secondLine, thirdLine, fourthLine, fifthLine;
 
     @FXML
     private Rectangle lineRectangle;
 
     @FXML
-    private Button playPauseButton;
-
-    @FXML
-    private Button pauseButton;
-
-    @FXML
-    private Label runnerLabel;
-
-    @FXML
-    private Line secondLine;
+    private Button playPauseButton, pauseButton, exitButton;
 
     @FXML
     private Rectangle startRectangle;
-
-    @FXML
-    private Line thirdLine;
-    
-      @FXML
-    private Line fifthLine;
     
      @FXML
     private ImageView endRace;
      
      @FXML
-     private ImageView runnerMoving1;
-
-    @FXML
-    private ImageView runnerMoving2;
-
-    @FXML
-    private ImageView runnerMoving3;
-
-    @FXML
-    private ImageView runnerMoving4;
-
-    @FXML
-    private ImageView runnerMoving5;
-    
-     @FXML
-     private Button exitButton;
-     
-     @FXML
-    private ImageView marathoners;
-     
-      @FXML
-    private Pane startRace;
-      
-      @FXML
-    private Label greetingLabel;
+     private ImageView runnerMoving1, runnerMoving2, runnerMoving3, runnerMoving4, runnerMoving5, marathoners;
       
       @FXML
     private TextArea textArea;
@@ -131,21 +90,47 @@ import javafx.util.Duration;
      //
      private Label lblImage = new Label();
      private List<Image> images1;
+     private List<ImageView> imageViews;
      private ParallelTransition fullRun;
      private int index = 0;
      private MediaPlayer mediaPlayer;
      private ModelRunner raceRunner;
+     private ParallelTransition[] runnerAnimation = new ParallelTransition[5];
      
-     
+    @FXML
+    public void initialize() {
+        // TODO: Initialize model and setup UI components
+    }
+
+    public void initializeModel() {
+        this.raceRunner = new ModelRunner();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+       images1 = new ArrayList();
+       images1.add(new Image(getClass().getResource("/images/1.png").toExternalForm()));
+       images1.add(new Image(getClass().getResource("/images/2.png").toExternalForm()));
+       images1.add(new Image(getClass().getResource("/images/3.png").toExternalForm()));
+       images1.add(new Image(getClass().getResource("/images/4.png").toExternalForm()));
+       images1.add(new Image(getClass().getResource("/images/5.png").toExternalForm()));
+       marathoners.setImage(images1.get(0));
+       
+       pause = new PauseTransition(Duration.seconds(1));
+       pause.setOnFinished(e -> slideTransition());
+       pause.play();
+       
+       
+    }
      
      @FXML
      void runnerMoving(ActionEvent event) {
          
-         runnerMoving1(firstLine);
-         runnerMoving1(secondLine);
-         runnerMoving1(thirdLine);
-         runnerMoving1(fourthLine);
-         runnerMoving1(fifthLine);
+//         runnerMoving1(firstLine);
+//         runnerMoving1(secondLine);
+//         runnerMoving1(thirdLine);
+//         runnerMoving1(fourthLine);
+//         runnerMoving1(fifthLine);
          //to not see the marathoners anymore
          //startRace.setVisible(false);
 //         
@@ -189,10 +174,15 @@ import javafx.util.Duration;
       * method that make the marathoners move
       * @param line the path that the runner should follow
       */
-     public void runnerMoving1(Line line) {
+     public void runnerMoving1(Line line, int runnerNumber) {
          //to not see the marathoners anymore
+         
+         
          startRace.setVisible(false);
          marathoners.setVisible(false);
+         
+         Runner runner = raceRunner.getRunnerbyNumber(runnerNumber);
+         ImageView imageView = imageViews.get(runnerNumber - 1);
          
         // Load running frames
         List<Image> runnerFrames = new ArrayList<>();
@@ -238,19 +228,12 @@ import javafx.util.Duration;
         fullRun.stop();
     }
     
+    
+    
     /**
      * Do the transition between all the marathoners of the simulation
      */
-    private void marathonersTransition() {
-//        String sound1 = getClass().getResource("/sound/soundRace.mp3").toExternalForm();
-//        Media media = new Media(sound1);
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
-
-        String soundFile = getClass().getResource("/sound/soundRace.mp3").toExternalForm();
-        Media sound = new Media(soundFile);
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
+    private void slideTransition() { // might have to change it
         
         FadeTransition ftrans;
         FadeTransition ftIn;
@@ -271,31 +254,27 @@ import javafx.util.Duration;
        seq1.setCycleCount(Animation.INDEFINITE);
        seq1.play();
        
+       //sound
+       playSound();
+       
+    }
+    
+    public void playSound() {
+        String soundFile = getClass().getResource("/sound/soundRace.mp3").toString();
+        Media sound = new Media(soundFile);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+    }
+    
+    private double calculateAnimationDuration(double speed) {
+        return 15.0 * (2.0 / speed);
     }
 
-    @FXML
-    public void initialize() {
-        // TODO: Initialize model and setup UI components
-    }
-
-    // TODO: Add methods to handle button actions
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-       images1 = new ArrayList();
-       images1.add(new Image(getClass().getResource("/images/1.png").toExternalForm()));
-       images1.add(new Image(getClass().getResource("/images/2.png").toExternalForm()));
-       images1.add(new Image(getClass().getResource("/images/3.png").toExternalForm()));
-       images1.add(new Image(getClass().getResource("/images/4.png").toExternalForm()));
-       images1.add(new Image(getClass().getResource("/images/5.png").toExternalForm()));
-       marathoners.setImage(images1.get(0));
-       
-       pause = new PauseTransition(Duration.seconds(1));
-       pause.setOnFinished(e -> marathonersTransition());
-       pause.play();
-       
-       
+    public void runnerAnimation(int runnerNumber) {
+        List<Line> lines = List.of(firstLine, secondLine, thirdLine, fourthLine);
+        Line line = lines.get(runnerNumber - 1);
+        
+        runnerMoving1(line, runnerNumber);
     }
 }    
     
-
