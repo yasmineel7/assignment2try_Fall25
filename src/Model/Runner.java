@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package Model;
 
 import java.util.Objects;
 
@@ -15,9 +15,9 @@ public class Runner {
     private boolean isUserSelected;
     
 
-    public Runner(String name, double distance, int number, double speed) {
+    public Runner(String name, int number, double speed) {
         this.name = name;
-        this.position = distance;
+        this.position = 0;
         this.number = number;
         this.speed = speed;
         this.isWinner = false;
@@ -29,6 +29,10 @@ public class Runner {
     
     public void reset() {
         
+    }
+    
+    public void setWinner(boolean isWinner) {
+    this.isWinner = isWinner;
     }
     
     public void updatePosition() {
@@ -108,7 +112,5 @@ public class Runner {
     public void setIsWinner(boolean isWinner) {
         this.isWinner = isWinner;
     }
-    
-    
     
 }
