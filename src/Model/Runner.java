@@ -105,7 +105,9 @@ public class Runner {
         }
         return Objects.equals(this.name, other.name);
     }
-
+    
+    
+    //getter and setter
     public String getName() {
         return name;
     }

@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.ModelRunner;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -119,20 +120,22 @@ import javafx.util.Duration;
     private TextArea textArea;
      
      //other variables
-     Image[] images = new Image[3];
+     private Image[] images = new Image[3];
      
      //variables of transitions
-     PathTransition path;
-     SequentialTransition seq;
-     SequentialTransition seq1;
-     PauseTransition pause;
+     private PathTransition path;
+     private SequentialTransition seq;
+     private SequentialTransition seq1;
+     private PauseTransition pause;
      
      //
-     Label lblImage = new Label();
-     List<Image> images1;
-     ParallelTransition fullRun;
-     int index = 0;
-     MediaPlayer mediaPlayer;
+     private Label lblImage = new Label();
+     private List<Image> images1;
+     private ParallelTransition fullRun;
+     private int index = 0;
+     private MediaPlayer mediaPlayer;
+     private ModelRunner raceRunner;
+     
      
      
      @FXML

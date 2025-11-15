@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author yasmi
  */
-public class modelRunner {
+public class ModelRunner {
     private List<Runner> runners;
     private boolean raceStarted;
     private boolean raceFinished;
@@ -19,7 +19,7 @@ public class modelRunner {
     private double raceDistance = 500.0;
     private Runner selectedRunner;
 
-    public modelRunner() {
+    public ModelRunner() {
         this.runners = new ArrayList();
         this.raceStarted = false;
         this.raceFinished = false;
