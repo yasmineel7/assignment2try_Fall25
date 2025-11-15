@@ -11,32 +11,65 @@ public class Runner {
     private double position;
     private int number;
     private double baseSpeed;
+    private double currentSpeed;
     private boolean isWinner;
     private boolean isUserSelected;
     
 
-    public Runner(String name, int number, double speed) {
+    public Runner(String name, int number, double basespeed, double currentSpeed) {
         this.name = name;
         this.position = 0;
         this.number = number;
-        this.baseSpeed = speed;
+        this.baseSpeed = basespeed;
         this.isWinner = false;
+        this.currentSpeed = currentSpeed;
         
     }
     
 
     // TODO: Add methods (e.g., update position, reset, etc.)
     
+    /**
+     * to reset the speed to it's first one
+     */
+    public void resetSpeed() {
+        this.currentSpeed = baseSpeed;
+    }
+    
+    /**
+     * to reset the race from the beginning
+     */
     public void reset() {
-        
+        this.position = 0;
+        this.isWinner = false;
+        resetSpeed();
     }
     
     public void setWinner(boolean isWinner) {
     this.isWinner = isWinner;
     }
     
+    /**
+     * to update the position of the runner
+     */
     public void updatePosition() {
-        this.position += this.baseSpeed * (Math.random());
+        this.position += this.currentSpeed * (Math.random());
+    }
+    
+    /**
+     * to increase the baseSpeed 
+     * @param increaseSpeed the incresement used
+     */
+    public void increaseSpeed(double increaseSpeed) {
+        this.currentSpeed += increaseSpeed;
+    }
+    
+    /**
+     * to decrease the baseSpeed
+     * @param decreaseSpeed the decreasement used
+     */
+    public void decreaseSpeed(double decreaseSpeed) {
+        this.currentSpeed -= decreaseSpeed;
     }
     
     @Override
@@ -112,5 +145,15 @@ public class Runner {
     public void setIsWinner(boolean isWinner) {
         this.isWinner = isWinner;
     }
+
+    public double getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    public void setCurrentSpeed(double currentSpeed) {
+        this.currentSpeed = currentSpeed;
+    }
+    
+    
     
 }
