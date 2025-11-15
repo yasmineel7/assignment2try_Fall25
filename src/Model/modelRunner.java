@@ -12,7 +12,7 @@ import java.util.List;
  * @author yasmi
  */
 public class modelRunner {
-    private final List<Runner> runners;
+    private List<Runner> runners;
     private boolean raceStarted;
     private boolean raceFinished;
     private Runner winner;
@@ -32,7 +32,7 @@ public class modelRunner {
       if (raceStarted && !raceFinished){
           for (Runner runner : runners) {
               runner.updatePosition();
-              if (runner.getCurrentPosition>= 400 && winner == null) {
+              if (runner.getPosition()>= 400 && winner == null) {
                   winner = runner;
                   raceFinished = true;
                   runner.setIsWinner(true);
@@ -49,7 +49,17 @@ public class modelRunner {
   }
   
   public void pauseRace() {
-      
+      raceStarted = false;
+  }
+  
+  public void resetRunner() {
+       for (Runner runner : runners) {
+            runner.setPosition(0);
+            runner.setWinner(false);
+        }
+        raceStarted = false;
+        raceFinished = false;
+        winner = null;
   }
 
     public boolean isRaceFinished() {
@@ -58,6 +68,22 @@ public class modelRunner {
 
     public void setRaceFinished(boolean raceFinished) {
         this.raceFinished = raceFinished;
+    }
+
+    public List<Runner> getRunners() {
+        return runners;
+    }
+
+    public void setRunners(List<Runner> runners) {
+        this.runners = runners;
+    }
+
+    public Runner getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Runner winner) {
+        this.winner = winner;
     }
   
     
