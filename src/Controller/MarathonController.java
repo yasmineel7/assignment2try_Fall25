@@ -95,7 +95,7 @@ import javafx.util.Duration;
      private int index = 0;
      private MediaPlayer mediaPlayer;
      private ModelRunner raceRunner;
-     private ParallelTransition[] runnerAnimation = new ParallelTransition[5];
+     private ParallelTransition[] runnerAnimations = new ParallelTransition[5];
      
     @FXML
     public void initialize() {
@@ -105,22 +105,31 @@ import javafx.util.Duration;
     public void initializeModel() {
         this.raceRunner = new ModelRunner();
     }
+    
+    public void initializeRunner() {
+        imageViews = new ArrayList();
+        imageViews.add(runnerMoving1);
+        imageViews.add(runnerMoving2);
+        imageViews.add(runnerMoving3);
+        imageViews.add(runnerMoving4);
+        imageViews.add(runnerMoving5);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       images1 = new ArrayList();
-       images1.add(new Image(getClass().getResource("/images/1.png").toExternalForm()));
-       images1.add(new Image(getClass().getResource("/images/2.png").toExternalForm()));
-       images1.add(new Image(getClass().getResource("/images/3.png").toExternalForm()));
-       images1.add(new Image(getClass().getResource("/images/4.png").toExternalForm()));
-       images1.add(new Image(getClass().getResource("/images/5.png").toExternalForm()));
-       marathoners.setImage(images1.get(0));
+//       images1 = new ArrayList();
+//       images1.add(new Image(getClass().getResource("/images/1.png").toExternalForm()));
+//       images1.add(new Image(getClass().getResource("/images/2.png").toExternalForm()));
+//       images1.add(new Image(getClass().getResource("/images/3.png").toExternalForm()));
+//       images1.add(new Image(getClass().getResource("/images/4.png").toExternalForm()));
+//       images1.add(new Image(getClass().getResource("/images/5.png").toExternalForm()));
+//       marathoners.setImage(images1.get(0));
+//       
+//       pause = new PauseTransition(Duration.seconds(1));
+//       pause.setOnFinished(e -> slideTransition());
+//       pause.play();
        
-       pause = new PauseTransition(Duration.seconds(1));
-       pause.setOnFinished(e -> slideTransition());
-       pause.play();
-       
-       
+       displayWinner();
     }
      
      @FXML
@@ -173,16 +182,20 @@ import javafx.util.Duration;
      /**
       * method that make the marathoners move
       * @param line the path that the runner should follow
+      * @param runnerNumber the number of the runner
       */
      public void runnerMoving1(Line line, int runnerNumber) {
          //to not see the marathoners anymore
          
-         
-         startRace.setVisible(false);
-         marathoners.setVisible(false);
+//         startRace.setVisible(false);
+//         marathoners.setVisible(false);
          
          Runner runner = raceRunner.getRunnerbyNumber(runnerNumber);
          ImageView imageView = imageViews.get(runnerNumber - 1);
+         
+         imageView.setVisible(true);
+         imageView.setLayoutX(line.getStartX());
+         imageView.setLayoutY(line.getStartY() - 25);
          
         // Load running frames
         List<Image> runnerFrames = new ArrayList<>();
@@ -205,11 +218,12 @@ import javafx.util.Duration;
 
         // Create animation for changing images
         final int[] index1 = {0};
+        double rate = Math.max(80, runner.getCurrentSpeed());
         Timeline frameAnimation = new Timeline(
-        new KeyFrame(Duration.millis(120), e -> {
+        new KeyFrame(Duration.millis(rate), e -> {
         index1[0] = (index1[0] + 1) % runnerFrames.size();
         runnerMoving1.setImage(runnerFrames.get(index1[0]));
-        })
+            })
         );
         frameAnimation.setCycleCount(Animation.INDEFINITE);
 
@@ -226,8 +240,13 @@ import javafx.util.Duration;
        @FXML
     void runnerStop(ActionEvent event) {
         fullRun.stop();
+        raceRunner.pauseRace();
+        for (ParallelTransition animation : runnerAnimations) {
+            if (animation != null) {
+                animation.stop();
+            }
+        }
     }
-    
     
     
     /**
@@ -235,33 +254,46 @@ import javafx.util.Duration;
      */
     private void slideTransition() { // might have to change it
         
+        List<Image> slideShowImages = new ArrayList();
+        for (int i = 1; i <= 5; i++) {
+            slideShowImages.add(new Image(getClass().getResource("/images/" + i + ".png").toExternalForm()));
+        }
+        
         FadeTransition ftrans;
         FadeTransition ftIn;
         
         ftrans = new FadeTransition(new Duration(2000), marathoners);
         ftrans.setFromValue(1.0);
         ftrans.setToValue(0.0);
-        ftrans.setOnFinished(e -> {
-        index = (index + 1) % images1.size();
-        marathoners.setImage(images1.get(index));
-        });
+//        ftrans.setOnFinished(e -> {
+//        index = (index + 1) % images1.size();
+//        marathoners.setImage(images1.get(index));
+//        });
          
         ftIn = new FadeTransition(new Duration(2000), marathoners);
         ftIn.setFromValue(0.0);
        ftIn.setToValue(1.0);
        
-       seq1 = new SequentialTransition(ftrans, ftIn);
+       pause = new PauseTransition(Duration.seconds(2));
+       
+       seq1 = new SequentialTransition(ftrans, pause, ftIn);
        seq1.setCycleCount(Animation.INDEFINITE);
-       seq1.play();
+       
+       seq1.setOnFinished(e -> {
+           index = (index + 1) % slideShowImages.size();
+           marathoners.setImage(slideShowImages.get(index));
+       });
        
        //sound
        playSound();
        
+       seq1.play();
     }
     
     public void playSound() {
         String soundFile = getClass().getResource("/sound/soundRace.mp3").toString();
         Media sound = new Media(soundFile);
+        mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
     }
@@ -275,6 +307,19 @@ import javafx.util.Duration;
         Line line = lines.get(runnerNumber - 1);
         
         runnerMoving1(line, runnerNumber);
+    }
+    
+    public void displayWinner() {
+        Runner winner = raceRunner.getWinner();
+        
+        if (winner != null) {
+            textArea.setText("""
+                             RACE FINISHED!!\n
+                             Congradulation to all the marathoners!\n
+                             Winner: """ + winner.getName() + " # " + winner.getNumber()
+            +  "\n PathTransiton and fadeTransition have been used for this application." +
+                    "\n "); //add something maybe
+        }
     }
 }    
     
