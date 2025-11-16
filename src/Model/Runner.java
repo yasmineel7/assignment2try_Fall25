@@ -14,15 +14,17 @@ public class Runner {
     private double currentSpeed;
     private boolean isWinner;
     private boolean isUserSelected;
+    private String imagePath;
     
 
-    public Runner(String name, int number, double basespeed, double currentSpeed) {
+    public Runner(String name, int number, double basespeed, String imagePath) {
         this.name = name;
-        this.position = 0;
         this.number = number;
         this.baseSpeed = basespeed;
+        this.position = 0;
         this.isWinner = false;
-        this.currentSpeed = currentSpeed;
+        this.currentSpeed = basespeed;
+        this.imagePath = imagePath;
         
     }
     
