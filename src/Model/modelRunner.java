@@ -29,7 +29,11 @@ public class ModelRunner {
     
 
     public void initializeRunners() {
-      
+      runners.add(new Runner("John", 10, 3.5, "/images/1.png"));
+      runners.add(new Runner("Alex", 1, 3, "/images/2.png"));
+      runners.add(new Runner("Mia", 3, 3.2, "/images/3.png"));
+      runners.add(new Runner("Adam", 7, 3.1, "/images/4.png"));
+      runners.add(new Runner("Bob", 5, 3.3, "/images/5.png"));
     }
 
     public void  updateRace() {
