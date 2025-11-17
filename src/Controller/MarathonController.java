@@ -278,6 +278,7 @@ import javax.sound.sampled.Clip;
          for (ParallelTransition animation : runnerAnimations) {
             if (animation != null) {
                 animation.stop();
+               // displayWinner();
             }
          }
     }
@@ -326,12 +327,7 @@ import javax.sound.sampled.Clip;
     }
     
     public void playSound(String fileName) {
-//        String soundFile = getClass().getResource("/sound/soundRace.wav").toString();
-//        Media sound = new Media(soundFile);
-//        mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//        mediaPlayer.play();
-try {
+    try {
         AudioInputStream audioIn = AudioSystem.getAudioInputStream(
             getClass().getResource("/sound/" + fileName)
         );

@@ -12,7 +12,7 @@ import java.util.List;
  * @author yasmi
  */
 public class ModelRunner {
-    private List<Runner> runners;
+    private List<Runner> runners = new ArrayList();
     private boolean raceStarted;
     private boolean raceFinished;
     private Runner winner;
@@ -23,8 +23,13 @@ public class ModelRunner {
         this.runners = new ArrayList();
         this.raceStarted = false;
         this.raceFinished = false;
-        this.selectedRunner = runners.get(0);
         initializeRunners();
+        
+        if (runners.isEmpty()) {
+    throw new IllegalStateException("No runners available");
+        }
+        this.selectedRunner = runners.get(0);
+        
     }
     
 
@@ -58,7 +63,7 @@ public class ModelRunner {
     }
     
     public Runner getRunnerbyNumber(int number) {
-        return (Runner) runners.stream().filter(r -> r.getNumber() == number);
+        return (Runner) runners.stream().filter(r -> r.getNumber() == number).findFirst().orElse(null);
     }
     
     /**
