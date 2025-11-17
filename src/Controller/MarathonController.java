@@ -116,6 +116,11 @@ import javax.sound.sampled.Clip;
         imageViews.add(runnerMoving3);
         imageViews.add(runnerMoving4);
         imageViews.add(runnerMoving5);
+        
+        //to not see the runners until the user click on play
+        for (ImageView image: imageViews) {
+            image.setVisible(false);
+        }
     }
 
     @Override
@@ -133,7 +138,7 @@ import javax.sound.sampled.Clip;
        pause.play();
        initializeModel();
        initializeRunner();
-       displayWinner();
+      // exitButton.toFront();
     }
      
     /**
@@ -223,31 +228,52 @@ import javax.sound.sampled.Clip;
            }
 
         // Create an ImageView for the runner
-        runnerMoving1 = new ImageView(runnerFrames.get(0));
-        runnerMoving1.setFitWidth(50);
-        runnerMoving1.setFitHeight(50);
-        pane.getChildren().add(runnerMoving1);
+//        runnerMoving1 = new ImageView(runnerFrames.get(0));
+        imageView.setFitWidth(50);
+        imageView.setFitHeight(50);
+//        pane.getChildren().add(runnerMoving1);
 
         // Create path movement
         PathTransition moveRunner = new PathTransition();
-        moveRunner.setNode(runnerMoving1);
+        moveRunner.setNode(imageView);
         moveRunner.setPath(line); 
         moveRunner.setDuration(Duration.seconds(10));
         moveRunner.setCycleCount(1);
 
         // Create animation for changing images
-        final int[] index1 = {0};
-        double rate = Math.max(80, runner.getCurrentSpeed());
+       // final int[] index1 = {0};
+        //double rate = Math.max(80, runner.getCurrentSpeed());
         Timeline frameAnimation = new Timeline(
-        new KeyFrame(Duration.millis(rate), e -> {
-        index1[0] = (index1[0] + 1) % runnerFrames.size();
-        runnerMoving1.setImage(runnerFrames.get(index1[0]));
+        new KeyFrame(Duration.millis(120), e -> {
+        int index1 = (int) ((System.currentTimeMillis()/120) % runnerFrames.size());
+        imageView.setImage(runnerFrames.get(index1));
             })
         );
         frameAnimation.setCycleCount(Animation.INDEFINITE);
 
         // Combine both animations
         fullRun = new ParallelTransition(moveRunner, frameAnimation);
+        runnerAnimations[runnerNumber - 1] = fullRun;
+        
+         moveRunner.setOnFinished(e -> {
+        if (!raceRunner.isRaceFinished()) {
+
+            // declare winner
+            raceRunner.setRaceFinished(true);
+            raceRunner.setWinner(runner);
+
+            // stop all other runners
+            for (ParallelTransition anim : runnerAnimations) {
+                if (anim != null && anim.getStatus() == Animation.Status.RUNNING) {
+                    anim.stop();
+                }
+            }
+
+            // show winner in TextArea
+            displayWinner(runner);
+        }
+    });
+        
         fullRun.play();
 
      }
@@ -258,7 +284,6 @@ import javax.sound.sampled.Clip;
       */
        @FXML
     void runnerStop(ActionEvent event) {
-        fullRun.stop();
         raceRunner.pauseRace();
         for (ParallelTransition animation : runnerAnimations) {
             if (animation != null) {
@@ -275,13 +300,17 @@ import javax.sound.sampled.Clip;
     void exitApplication(ActionEvent event) {
         if (mediaPlayer != null) {
         mediaPlayer.stop();
+        }
          for (ParallelTransition animation : runnerAnimations) {
             if (animation != null) {
                 animation.stop();
                // displayWinner();
             }
          }
-    }
+         
+         Stage stage = (Stage) exitButton.getScene().getWindow();
+         stage.close();
+    
     }
     
     
@@ -321,22 +350,17 @@ import javax.sound.sampled.Clip;
 //       });
        
        //sound
-       playSound("soundRace.wav");
+       playSound();
        
        seq1.play();
     }
     
-    public void playSound(String fileName) {
-    try {
-        AudioInputStream audioIn = AudioSystem.getAudioInputStream(
-            getClass().getResource("/sound/" + fileName)
-        );
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioIn);
-        clip.start();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+    public void playSound() {
+        String soundFile = getClass().getResource("/sound/soundRace.wav").toExternalForm();
+        Media sound = new Media(soundFile);
+        mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
     }
     
     private double calculateAnimationDuration(double speed) {
@@ -349,18 +373,20 @@ import javax.sound.sampled.Clip;
          for (int i = 0; i < 5; i++) {
             int runnerNumber = i + 1;
             Line track = lines.get(i);
-            runnerMoving1(track, runnerNumber);
+            runnerMoving1(track, i + 1);
         }
     }
     
-    public void displayWinner() {
-        Runner winner = raceRunner.getWinner();
+    public void displayWinner(Runner winner) {
+         winner = raceRunner.getWinner();
         
         if (winner != null) {
-            textArea.setText("""
+            textArea.setPrefRowCount(5);
+            textArea.setPrefColumnCount(15);
+                    textArea.setText("""
                              RACE FINISHED!!\n
                              Congradulation to all the marathoners!\n
-                             Winner: """ + winner.getName() + " # " + winner.getNumber()
+                             Winner:  """ + winner.getName() + " # " + winner.getNumber()
             +  "\n PathTransiton and fadeTransition have been used for this application." +
                     "\n "); //add something maybe
         }
