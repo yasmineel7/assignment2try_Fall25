@@ -133,8 +133,26 @@ import javafx.util.Duration;
        displayWinner();
     }
      
+    /**
+     * to start the race
+     * @param event the event happening
+     */
      @FXML
-     void runnerMoving(ActionEvent event) {
+     void playRace(ActionEvent event) {
+         if (seq1 != null) {
+             seq1.stop();
+         }
+         
+         if (mediaPlayer != null) {
+             mediaPlayer.stop();
+         }
+         
+         startRace.setVisible(false);
+         marathoners.setVisible(false);
+         
+         //starting race
+         raceRunner.startRace();
+         runnerAnimation();
          
 //         runnerMoving1(firstLine);
 //         runnerMoving1(secondLine);
@@ -187,9 +205,6 @@ import javafx.util.Duration;
       */
      public void runnerMoving1(Line line, int runnerNumber) {
          //to not see the marathoners anymore
-         
-//         startRace.setVisible(false);
-//         marathoners.setVisible(false);
          
          Runner runner = raceRunner.getRunnerbyNumber(runnerNumber);
          ImageView imageView = imageViews.get(runnerNumber - 1);
@@ -249,6 +264,22 @@ import javafx.util.Duration;
         }
     }
     
+    /**
+     * to exit the application 
+     * @param event the event happening
+     */
+      @FXML
+    void exitApplication(ActionEvent event) {
+        if (mediaPlayer != null) {
+        mediaPlayer.stop();
+         for (ParallelTransition animation : runnerAnimations) {
+            if (animation != null) {
+                animation.stop();
+            }
+         }
+    }
+    }
+    
     
     /**
      * Do the transition between all the marathoners of the simulation
@@ -303,11 +334,14 @@ import javafx.util.Duration;
         return 15.0 * (2.0 / speed);
     }
 
-    public void runnerAnimation(int runnerNumber) {
+    public void runnerAnimation() {
         List<Line> lines = List.of(firstLine, secondLine, thirdLine, fourthLine);
-        Line line = lines.get(runnerNumber - 1);
         
-        runnerMoving1(line, runnerNumber);
+         for (int i = 0; i < 5; i++) {
+            int runnerNumber = i + 1;
+            Line track = lines.get(i);
+            runnerMoving1(track, runnerNumber);
+        }
     }
     
     public void displayWinner() {
