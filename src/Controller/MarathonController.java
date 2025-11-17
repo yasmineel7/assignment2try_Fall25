@@ -43,6 +43,9 @@ import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  * FXML Controller class
@@ -125,9 +128,9 @@ import javafx.util.Duration;
 //       images1.add(new Image(getClass().getResource("/images/5.png").toExternalForm()));
 //       marathoners.setImage(images1.get(0));
 //       
-//       pause = new PauseTransition(Duration.seconds(1));
-//       pause.setOnFinished(e -> slideTransition());
-//       pause.play();
+      pause = new PauseTransition(Duration.seconds(1));
+      pause.setOnFinished(e -> slideTransition());
+       pause.play();
        initializeModel();
        initializeRunner();
        displayWinner();
@@ -297,10 +300,10 @@ import javafx.util.Duration;
         ftrans = new FadeTransition(new Duration(2000), marathoners);
         ftrans.setFromValue(1.0);
         ftrans.setToValue(0.0);
-//        ftrans.setOnFinished(e -> {
-//        index = (index + 1) % images1.size();
-//        marathoners.setImage(images1.get(index));
-//        });
+       ftrans.setOnFinished(e -> {
+       index = (index + 1) % slideShowImages.size();
+        marathoners.setImage(slideShowImages.get(index));
+       });
          
         ftIn = new FadeTransition(new Duration(2000), marathoners);
         ftIn.setFromValue(0.0);
@@ -311,23 +314,33 @@ import javafx.util.Duration;
        seq1 = new SequentialTransition(ftrans, pause, ftIn);
        seq1.setCycleCount(Animation.INDEFINITE);
        
-       seq1.setOnFinished(e -> {
-           index = (index + 1) % slideShowImages.size();
-           marathoners.setImage(slideShowImages.get(index));
-       });
+//       seq1.setOnFinished(e -> {
+//           index = (index + 1) % slideShowImages.size();
+//           marathoners.setImage(slideShowImages.get(index));
+//       });
        
        //sound
-       playSound();
+       playSound("soundRace.wav");
        
        seq1.play();
     }
     
-    public void playSound() {
-        String soundFile = getClass().getResource("/sound/soundRace.mp3").toString();
-        Media sound = new Media(soundFile);
-        mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.play();
+    public void playSound(String fileName) {
+//        String soundFile = getClass().getResource("/sound/soundRace.wav").toString();
+//        Media sound = new Media(soundFile);
+//        mediaPlayer = new MediaPlayer(sound);
+//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//        mediaPlayer.play();
+try {
+        AudioInputStream audioIn = AudioSystem.getAudioInputStream(
+            getClass().getResource("/sound/" + fileName)
+        );
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioIn);
+        clip.start();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }
     
     private double calculateAnimationDuration(double speed) {
@@ -335,7 +348,7 @@ import javafx.util.Duration;
     }
 
     public void runnerAnimation() {
-        List<Line> lines = List.of(firstLine, secondLine, thirdLine, fourthLine);
+        List<Line> lines = List.of(firstLine, secondLine, thirdLine, fourthLine, fifthLine);
         
          for (int i = 0; i < 5; i++) {
             int runnerNumber = i + 1;
