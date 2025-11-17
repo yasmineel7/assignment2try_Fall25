@@ -128,7 +128,8 @@ import javafx.util.Duration;
 //       pause = new PauseTransition(Duration.seconds(1));
 //       pause.setOnFinished(e -> slideTransition());
 //       pause.play();
-       
+       initializeModel();
+       initializeRunner();
        displayWinner();
     }
      
