@@ -18,16 +18,17 @@
    <bottom>
       <HBox prefHeight="137.0" prefWidth="684.0" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="61.0" fitWidth="48.0" translateY="50.0">
+            <ImageView fitHeight="61.0" fitWidth="48.0" translateY="70.0">
                <image>
                   <Image url="@../images/volume.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="36.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0" translateY="50.0" />
-            <Button fx:id="playPauseButton" mnemonicParsing="false" onAction="#playRace" text="Play" translateX="-100.0" />
-            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#runnerStop" text="Pause" translateX="-100.0" />
-            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitApplication" text="Exit" translateX="-100.0" />
-            <TextArea fx:id="textArea" prefHeight="121.0" prefWidth="396.0" promptText="The Winner will be displayed here" translateX="35.0" />
+            <Button fx:id="playPauseButton" mnemonicParsing="false" onAction="#playRace" prefHeight="25.0" prefWidth="73.0" text="Play" translateX="-100.0" />
+            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pauseAllRaceAnimations" prefHeight="25.0" prefWidth="83.0" text="Pause" translateX="-100.0" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitApplication" prefHeight="25.0" prefWidth="73.0" text="Exit" translateX="-100.0" />
+            <Label fx:id="distanceLabel" prefHeight="17.0" prefWidth="86.0" text="Distance: " translateY="5.0" />
+            <TextArea fx:id="textArea" prefHeight="121.0" prefWidth="396.0" promptText="The Winner will be displayed here" translateX="10.0" />
          </children>
          <padding>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />

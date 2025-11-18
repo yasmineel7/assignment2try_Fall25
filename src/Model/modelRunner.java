@@ -34,8 +34,8 @@ public class ModelRunner {
     
 
     public void initializeRunners() {
-      runners.add(new Runner("John", 2, 3.5, "/images/1.png"));
-      runners.add(new Runner("Alex", 1, 3, "/images/2.png"));
+      runners.add(new Runner("John", 1, 3.5, "/images/1.png"));
+      runners.add(new Runner("Alex", 2, 3, "/images/2.png"));
       runners.add(new Runner("Mia", 3, 3.2, "/images/3.png"));
       runners.add(new Runner("Adam", 4, 3.1, "/images/4.png"));
       runners.add(new Runner("Bob", 5, 3.3, "/images/5.png"));
@@ -51,6 +51,12 @@ public class ModelRunner {
                   runner.setIsWinner(true);
                 }
             }
+        }
+    }
+    
+    public void resumeRace() {
+          if (!raceFinished) {
+            raceStarted = true;
         }
     }
     
@@ -121,6 +127,5 @@ public class ModelRunner {
     public void setWinner(Runner winner) {
         this.winner = winner;
     }
-  
     
 }
