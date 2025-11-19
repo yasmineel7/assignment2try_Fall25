@@ -25,7 +25,7 @@
             </ImageView>
             <ImageView fitHeight="36.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0" translateY="50.0" />
             <Button fx:id="playPauseButton" mnemonicParsing="false" onAction="#playRace" prefHeight="25.0" prefWidth="73.0" text="Play" translateX="-100.0" />
-            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#pauseAllRaceAnimations" prefHeight="25.0" prefWidth="83.0" text="Pause" translateX="-100.0" />
+            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#onPause" prefHeight="25.0" prefWidth="83.0" text="Pause" translateX="-100.0" />
             <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitApplication" prefHeight="25.0" prefWidth="73.0" text="Exit" translateX="-100.0" />
             <Label fx:id="distanceLabel" prefHeight="17.0" prefWidth="86.0" text="Distance: " translateY="5.0" />
             <TextArea fx:id="textArea" prefHeight="121.0" prefWidth="396.0" promptText="The Winner will be displayed here" translateX="10.0" />
@@ -73,34 +73,34 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </VBox>
-            <ImageView fx:id="runnerMoving4" fitHeight="68.0" fitWidth="61.0" layoutX="92.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/runner1.png" />
-               </image>
-            </ImageView>
             <ImageView fx:id="endRace" fitHeight="355.0" fitWidth="78.0" layoutX="622.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Screenshot%202025-11-12%20131023.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="runnerMoving3" fitHeight="84.0" fitWidth="62.0" layoutX="91.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="runnerMoving1" fitHeight="50.0" fitWidth="55.0" layoutX="90.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/runner1.png" />
+                  <Image url="@../images/runner.gif" />
                </image>
             </ImageView>
-            <ImageView fx:id="runnerMoving2" fitHeight="63.0" fitWidth="62.0" layoutX="91.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="runnerMoving2" fitHeight="54.0" fitWidth="58.0" layoutX="90.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/runner1.png" />
+                  <Image url="@../images/runner.gif" />
                </image>
             </ImageView>
-            <ImageView fx:id="runnerMoving1" fitHeight="77.0" fitWidth="65.0" layoutX="92.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="runnerMoving3" fitHeight="56.0" fitWidth="54.0" layoutX="93.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/runner1.png" />
+                  <Image url="@../images/runner.gif" />
                </image>
             </ImageView>
-            <ImageView fx:id="runnerMoving5" fitHeight="67.0" fitWidth="59.0" layoutX="92.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="runnerMoving4" fitHeight="49.0" fitWidth="45.0" layoutX="88.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/runner1.png" />
+                  <Image url="@../images/runner.gif" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="runnerMoving5" fitHeight="48.0" fitWidth="44.0" layoutX="91.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/runner.gif" />
                </image>
             </ImageView>
             <Rectangle fx:id="lineRectangle" arcHeight="5.0" arcWidth="5.0" height="355.0" layoutX="83.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="7.0" />

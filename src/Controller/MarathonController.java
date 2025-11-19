@@ -64,13 +64,10 @@ import javax.sound.sampled.Clip;
     private Line firstLine, secondLine, thirdLine, fourthLine, fifthLine;
 
     @FXML
-    private Rectangle lineRectangle;
+    private Rectangle lineRectangle, startRectangle;
 
     @FXML
     private Button playPauseButton, pauseButton, exitButton;
-
-    @FXML
-    private Rectangle startRectangle;
     
      @FXML
     private ImageView endRace;
@@ -99,6 +96,8 @@ import javax.sound.sampled.Clip;
      private MediaPlayer mediaPlayer;
      private ModelRunner raceRunner;
      private ParallelTransition[] runnerAnimations = new ParallelTransition[5];
+     private List<PathTransition> pathTransitions;
+     PathTransition path1;
      
     @FXML
     public void initialize() {
@@ -131,14 +130,18 @@ import javax.sound.sampled.Clip;
 //       images1.add(new Image(getClass().getResource("/images/3.png").toExternalForm()));
 //       images1.add(new Image(getClass().getResource("/images/4.png").toExternalForm()));
 //       images1.add(new Image(getClass().getResource("/images/5.png").toExternalForm()));
-//       marathoners.setImage(images1.get(0));
+//       marathoners.setImage(images1.get(0))
 //       
-      pause = new PauseTransition(Duration.seconds(1));
+        //initializing
+        pathTransitions = new ArrayList();
+        
+        pause = new PauseTransition(Duration.seconds(1));
       pause.setOnFinished(e -> slideTransition());
        pause.play();
        initializeModel();
        initializeRunner();
       // exitButton.toFront();
+      
     }
      
     /**
@@ -147,62 +150,22 @@ import javax.sound.sampled.Clip;
      */
      @FXML
      void playRace(ActionEvent event) {
-         if (seq1 != null) {
-             seq1.stop();
-         }
-         
-         if (mediaPlayer != null) {
-             mediaPlayer.stop();
-         }
-         
+         //end slidetransition
+         seq1.stop();
          startRace.setVisible(false);
-         marathoners.setVisible(false);
          
-         //starting race
-         raceRunner.startRace();
-         runnerAnimation();
+         if (!raceRunner.isRaceFinished()) {
+             raceRunner.startRace();
+         }
          
-//         runnerMoving1(firstLine);
-//         runnerMoving1(secondLine);
-//         runnerMoving1(thirdLine);
-//         runnerMoving1(fourthLine);
-//         runnerMoving1(fifthLine);
-         //to not see the marathoners anymore
-         //startRace.setVisible(false);
-//         
-//        // Load running frames
-//        List<Image> runnerFrames = new ArrayList<>();
-//        for (int i = 1; i <= 3; i++) {
-//        runnerFrames.add(new Image(getClass().getResource("/images/runner" + i + ".png").toExternalForm()));
-//           }
-//
-//        // Create an ImageView for the runner
-//        runnerMoving1 = new ImageView(runnerFrames.get(0));
-//        runnerMoving1.setFitWidth(50);
-//        runnerMoving1.setFitHeight(50);
-//        pane.getChildren().add(runnerMoving1);
-//
-//        // Create path movement
-//        PathTransition moveRunner = new PathTransition();
-//        moveRunner.setNode(runnerMoving1);
-//        moveRunner.setPath(firstLine); 
-//        moveRunner.setDuration(Duration.seconds(10));
-//        moveRunner.setCycleCount(1);
-//
-//        // Create animation for changing images
-//        final int[] index = {0};
-//        Timeline frameAnimation = new Timeline(
-//        new KeyFrame(Duration.millis(120), e -> {
-//        index[0] = (index[0] + 1) % runnerFrames.size();
-//        runnerMoving1.setImage(runnerFrames.get(index[0]));
-//        })
-//        );
-//        frameAnimation.setCycleCount(Animation.INDEFINITE);
-//
-//        // Combine both animations
-//        fullRun = new ParallelTransition(moveRunner, frameAnimation);
-//        fullRun.play();
-
+         for (ImageView image: imageViews) {
+             image.setVisible(true);
+         }
+       
+         for (PathTransition path: pathTransitions) {
+             path.playFromStart();
+             path1.play();
+         }
 
      }
      
@@ -211,87 +174,49 @@ import javax.sound.sampled.Clip;
       * @param line the path that the runner should follow
       * @param runnerNumber the number of the runner
       */
-     public void runnerMoving1(Line line, int runnerNumber) {
-         //to not see the marathoners anymore
+     public void runnerMoving1() {
+          path1 = new PathTransition(Duration.millis(4500), firstLine, runnerMoving1);
+         path1.play();
+//      List<ImageView> views = List.of(runnerMoving1, runnerMoving2, runnerMoving3, runnerMoving4, runnerMoving5);
+//      List<Line> paths = List.of(firstLine, secondLine, thirdLine, fourthLine, fifthLine);
+////      
+//      for (int i = 0; i < views.size(); i++) {
+//          PathTransition path = new PathTransition();
+//          path.setPath(paths.get(i));
+//          path.setNode(views.get(i));
+//      
+////      
+//      Runner r = raceRunner.getRunners().get(i);
+////      
+//      double baseDuration = 10000;
+//      double timeRace = baseDuration / r.getBaseSpeed();
+////      
+//      path.setDuration(Duration.millis(timeRace));
+//      path.setCycleCount(1);
+//      path.setAutoReverse(false);
+////      
+//     int y = i;
+////      
+//      path.setOnFinished(e -> {
+//          Runner runner = raceRunner.getRunners().get(y);
+//          endRace(runner);
+//      });
+////      
+//      pathTransitions.add(path);
+//       }
+
          
-         Runner runner = raceRunner.getRunnerbyNumber(runnerNumber);
-         ImageView imageView = imageViews.get(runnerNumber - 1);
-         
-         imageView.setVisible(true);
-         imageView.setLayoutX(line.getStartX());
-         imageView.setLayoutY(line.getStartY() - 25);
-         
-        // Load running frames
-        List<Image> runnerFrames = new ArrayList<>();
-        for (int i = 1; i <= 3; i++) {
-        runnerFrames.add(new Image(getClass().getResource("/images/runner" + i + ".png").toExternalForm()));
-           }
-
-        // Create an ImageView for the runner
-//        runnerMoving1 = new ImageView(runnerFrames.get(0));
-        imageView.setFitWidth(50);
-        imageView.setFitHeight(50);
-//        pane.getChildren().add(runnerMoving1);
-
-        // Create path movement
-        PathTransition moveRunner = new PathTransition();
-        moveRunner.setNode(imageView);
-        moveRunner.setPath(line); 
-        moveRunner.setDuration(Duration.seconds(10));
-        moveRunner.setCycleCount(1);
-
-        // Create animation for changing images
-       // final int[] index1 = {0};
-        //double rate = Math.max(80, runner.getCurrentSpeed());
-        Timeline frameAnimation = new Timeline(
-        new KeyFrame(Duration.millis(120), e -> {
-        int index1 = (int) ((System.currentTimeMillis()/120) % runnerFrames.size());
-        imageView.setImage(runnerFrames.get(index1));
-            })
-        );
-        frameAnimation.setCycleCount(Animation.INDEFINITE);
-
-        // Combine both animations
-        fullRun = new ParallelTransition(moveRunner, frameAnimation);
-        runnerAnimations[runnerNumber - 1] = fullRun;
-        
-         moveRunner.setOnFinished(e -> {
-        if (!raceRunner.isRaceFinished()) {
-
-            // declare winner
-            raceRunner.setRaceFinished(true);
-            raceRunner.setWinner(runner);
-
-            // stop all other runners
-            for (ParallelTransition anim : runnerAnimations) {
-                if (anim != null && anim.getStatus() == Animation.Status.RUNNING) {
-                    anim.stop();
-                }
-            }
-
-            // show winner in TextArea
-            displayWinner(runner);
-        }
-    });
-        
-        fullRun.play();
-
+  
      }
      
-     /**
-      * to stop the runners after they started the race
-      * @param event the event happening
-      */
-       @FXML
-    void runnerStop(ActionEvent event) {
-        raceRunner.pauseRace();
-        for (ParallelTransition animation : runnerAnimations) {
-            if (animation != null) {
-                animation.stop();
-            }
+     @FXML
+    void onPause(ActionEvent event) {
+        for (PathTransition path: pathTransitions) {
+            path.pause();
+            path1.pause();
         }
     }
-    
+
     /**
      * to exit the application 
      * @param event the event happening
@@ -301,11 +226,8 @@ import javax.sound.sampled.Clip;
         if (mediaPlayer != null) {
         mediaPlayer.stop();
         }
-         for (ParallelTransition animation : runnerAnimations) {
-            if (animation != null) {
-                animation.stop();
-               // displayWinner();
-            }
+         for (PathTransition path : pathTransitions) {
+            path.stop();
          }
          
          Stage stage = (Stage) exitButton.getScene().getWindow();
@@ -344,11 +266,6 @@ import javax.sound.sampled.Clip;
        seq1 = new SequentialTransition(ftrans, pause, ftIn);
        seq1.setCycleCount(Animation.INDEFINITE);
        
-//       seq1.setOnFinished(e -> {
-//           index = (index + 1) % slideShowImages.size();
-//           marathoners.setImage(slideShowImages.get(index));
-//       });
-       
        //sound
        playSound();
        
@@ -367,13 +284,15 @@ import javax.sound.sampled.Clip;
         return 15.0 * (2.0 / speed);
     }
 
-    public void runnerAnimation() {
-        List<Line> lines = List.of(firstLine, secondLine, thirdLine, fourthLine, fifthLine);
+    public void endRace(Runner runner) {
+    
+        raceRunner.setWinner(runner);
+        raceRunner.setRaceFinished(true);
         
-         for (int i = 0; i < 5; i++) {
-            int runnerNumber = i + 1;
-            Line track = lines.get(i);
-            runnerMoving1(track, i + 1);
+        displayWinner(runner);
+        
+        for (PathTransition path: pathTransitions) {
+            path.stop();
         }
     }
     
