@@ -14,7 +14,6 @@ public class Runner {
     private double currentSpeed;
     private boolean isWinner;
     private boolean isUserSelected;
-    private String imagePath;
     
 
     public Runner(String name, int number, double basespeed, String imagePath) {
@@ -24,12 +23,8 @@ public class Runner {
         this.position = 0;
         this.isWinner = false;
         this.currentSpeed = basespeed;
-        this.imagePath = imagePath;
         
     }
-    
-
-    // TODO: Add methods (e.g., update position, reset, etc.)
     
     /**
      * to reset the speed to it's first one
@@ -47,32 +42,14 @@ public class Runner {
         resetSpeed();
     }
     
+    /**
+     * to set who is the winner
+     * @param isWinner the actual winner
+     */
     public void setWinner(boolean isWinner) {
     this.isWinner = isWinner;
     }
     
-    /**
-     * to update the position of the runner
-     */
-    public void updatePosition() {
-        this.position += this.currentSpeed * (Math.random());
-    }
-    
-    /**
-     * to increase the baseSpeed 
-     * @param increaseSpeed the incresement used
-     */
-    public void increaseSpeed(double increaseSpeed) {
-        this.currentSpeed += increaseSpeed;
-    }
-    
-    /**
-     * to decrease the baseSpeed
-     * @param decreaseSpeed the decreasement used
-     */
-    public void decreaseSpeed(double decreaseSpeed) {
-        this.currentSpeed -= decreaseSpeed;
-    }
     
     @Override
     public int hashCode() {

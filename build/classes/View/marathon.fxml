@@ -13,22 +13,17 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MarathonController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MarathonController">
    <bottom>
       <HBox prefHeight="137.0" prefWidth="684.0" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="61.0" fitWidth="48.0" translateY="70.0">
-               <image>
-                  <Image url="@../images/volume.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="36.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0" translateY="50.0" />
-            <Button fx:id="playPauseButton" mnemonicParsing="false" onAction="#playRace" prefHeight="25.0" prefWidth="73.0" text="Play" translateX="-100.0" />
-            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#onPause" prefHeight="25.0" prefWidth="83.0" text="Pause" translateX="-100.0" />
-            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitApplication" prefHeight="25.0" prefWidth="73.0" text="Exit" translateX="-100.0" />
-            <Label fx:id="distanceLabel" prefHeight="17.0" prefWidth="86.0" text="Distance: " translateY="5.0" />
-            <TextArea fx:id="textArea" prefHeight="121.0" prefWidth="396.0" promptText="The Winner will be displayed here" translateX="10.0" />
+            <Button fx:id="playPauseButton" mnemonicParsing="false" onAction="#playRace" prefHeight="25.0" prefWidth="73.0" text="Play" translateX="-40.0" />
+            <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#onPause" prefHeight="25.0" prefWidth="83.0" text="Pause" translateX="-40.0" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitApplication" prefHeight="25.0" prefWidth="73.0" text="Exit" translateX="-40.0" />
+            <TextArea fx:id="textArea" prefHeight="121.0" prefWidth="396.0" promptText="The Winner will be displayed here" translateX="80.0" />
          </children>
          <padding>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -40,11 +35,16 @@
    <center>
       <Pane fx:id="pane" prefHeight="390.0" prefWidth="685.0" style="-fx-border-color: BLACK; -fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Line fx:id="fourthLine" endX="646.0" endY="270.0" startX="91.0" startY="270.0" />
-            <Line fx:id="fifthLine" endX="649.0" endY="336.0" startX="95.0" startY="336.0" />
-            <Line fx:id="secondLine" endX="477.0" endY="44.0" layoutX="174.0" layoutY="82.0" startX="-85.0" startY="44.0" />
-            <Line fx:id="thirdLine" endX="657.0" endY="202.0" startX="93.0" startY="202.0" />
-            <Line fx:id="firstLine" endX="474.0" endY="16.0" layoutX="188.0" layoutY="38.0" startX="-97.0" startY="16.0" />
+            <Line fx:id="fourthLine" endX="791.0" endY="221.0" startX="88.0" startY="221.0" />
+            <Line fx:id="tenthLine" endX="770.0" startX="84.5" />
+            <Line fx:id="ninthLine" endX="802.5970458984375" endY="37.0" startX="83.0" startY="37.0" />
+            <Line fx:id="fifthLine" endX="790.0" endY="289.0" startX="87.0" startY="289.0" />
+            <Line fx:id="secondLine" endX="560.0" endY="26.0" layoutX="174.0" layoutY="82.0" startX="-84.0" startY="26.0" />
+            <Line fx:id="eightLine" endX="791.0" endY="22.0" startX="87.29289245605469" startY="22.0" />
+            <Line fx:id="seventhLine" endX="774.0" endY="71.0" startX="85.29289245605469" startY="71.0" />
+            <Line fx:id="sixthLine" endX="811.0" endY="109.0" startX="86.29289245605469" startY="109.0" />
+            <Line fx:id="thirdLine" endX="791.0" endY="172.0" startX="93.0" startY="172.0" />
+            <Line fx:id="firstLine" endX="600.0" endY="16.0" layoutX="188.0" layoutY="38.0" startX="-97.0" startY="16.0" />
             <Rectangle fx:id="startRectangle" arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="354.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
             <VBox layoutX="25.0" layoutY="17.0" prefHeight="306.0" prefWidth="34.0" spacing="35.0">
                <children>
@@ -73,14 +73,9 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </VBox>
-            <ImageView fx:id="endRace" fitHeight="355.0" fitWidth="78.0" layoutX="622.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="endRace" fitHeight="360.0" fitWidth="157.0" layoutX="722.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Screenshot%202025-11-12%20131023.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="runnerMoving1" fitHeight="50.0" fitWidth="55.0" layoutX="90.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/runner.gif" />
                </image>
             </ImageView>
             <ImageView fx:id="runnerMoving2" fitHeight="54.0" fitWidth="58.0" layoutX="90.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
@@ -103,19 +98,62 @@
                   <Image url="@../images/runner.gif" />
                </image>
             </ImageView>
-            <Rectangle fx:id="lineRectangle" arcHeight="5.0" arcWidth="5.0" height="355.0" layoutX="83.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="7.0" />
-            <Pane fx:id="startRace" layoutX="341.0" layoutY="18.0" prefHeight="255.0" prefWidth="260.0" style="-fx-background-color: white;">
+            <Rectangle fx:id="lineRectangle" arcHeight="5.0" arcWidth="5.0" height="355.0" layoutX="80.0" stroke="BLACK" strokeType="INSIDE" width="7.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fcfcfc" height="73.0" layoutX="86.0" stroke="BLACK" strokeType="INSIDE" width="637.0" />
+            <ImageView fx:id="runnerMoving1" fitHeight="50.0" fitWidth="55.0" layoutX="90.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/runner.gif" />
+               </image>
+            </ImageView>
+            <Text layoutX="95.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#4">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="98.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="105.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="98.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="95.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#5">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Pane fx:id="startRace" layoutX="-8.0" layoutY="1.0" prefHeight="500.0" prefWidth="810.0" style="-fx-background-color: white;">
                <children>
-                  <Label fx:id="greetingLabel" style="-fx-background-color: white;" text="Welcome to the JavaFX simulation!">
+                  <ImageView fitHeight="480.0" fitWidth="837.0" layoutX="-1.0" layoutY="-81.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/marathonerstrack.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="greetingLabel" layoutX="144.0" layoutY="32.0" text="Welcome to the JavaFX simulation!">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold Italic" size="33.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="marathoners" fitHeight="229.0" fitWidth="200.0" layoutX="4.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="marathoners" fitHeight="297.0" fitWidth="280.0" layoutX="278.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/1.png" />
                      </image>
                   </ImageView>
+                  <Label layoutX="27.0" layoutY="411.0" prefHeight="27.0" prefWidth="361.0" text="Click here to skip the presentation of the runners or start the race: " />
+                  <ImageView fitHeight="61.0" fitWidth="48.0" layoutX="727.0" layoutY="428.0">
+                     <image>
+                        <Image url="@../images/volume.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="startButton" layoutX="406.0" layoutY="413.0" mnemonicParsing="false" onAction="#start" prefHeight="29.0" prefWidth="110.0" text="Start" />
                </children>
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />

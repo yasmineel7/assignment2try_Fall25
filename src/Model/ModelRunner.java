@@ -41,18 +41,19 @@ public class ModelRunner {
       runners.add(new Runner("Bob", 5, 3.3, "/images/5.png"));
     }
 
-    public void  updateRace() {
-        if (raceStarted && !raceFinished){
-            for (Runner runner : runners) {
-              runner.updatePosition();
-                if (runner.getPosition()>= raceDistance && winner == null) {
-                  winner = runner;
-                  raceFinished = true;
-                  runner.setIsWinner(true);
-                }
-            }
-        }
-    }
+    //no need of this method anymore
+//    public void  updateRace() {
+//        if (raceStarted && !raceFinished){
+//            for (Runner runner : runners) {
+//              runner.updatePosition();
+//                if (runner.getPosition()>= raceDistance && winner == null) {
+//                  winner = runner;
+//                  raceFinished = true;
+//                  runner.setIsWinner(true);
+//                }
+//            }
+//        }
+//    }
     
     public void resumeRace() {
           if (!raceFinished) {
@@ -60,14 +61,11 @@ public class ModelRunner {
         }
     }
     
-    public void increaseSpeedRunner() {
-        
-    }
-    
-    public void decreaseRunnerSpeed() {
-        
-    }
-    
+    /**
+     * to get the number of the runner
+     * @param number the number of the runner
+     * @return 
+     */
     public Runner getRunnerbyNumber(int number) {
         return (Runner) runners.stream().filter(r -> r.getNumber() == number).findFirst().orElse(null);
     }
@@ -80,7 +78,9 @@ public class ModelRunner {
             runner.resetSpeed();
         }
     }
-  
+  /**
+   * to start the race
+   */
     public void startRace() {
       raceStarted = true;
       raceFinished = false;
@@ -88,10 +88,16 @@ public class ModelRunner {
        
     }
   
+    /**
+     * to pause the race
+     */
     public void pauseRace() {
       raceStarted = false;
     }
   
+    /**
+     * to reset the race
+     */
     public void resetRace() {
        for (Runner runner : runners) {
             runner.setPosition(0);
@@ -103,10 +109,18 @@ public class ModelRunner {
         winner = null;
     }
 
+    /**
+     * to know if the race finished
+     * @return true if the race finished
+     */
     public boolean isRaceFinished() {
         return raceFinished;
     }
 
+    /**
+     * to set if the race is finished
+     * @param raceFinished true if the race is finished false if not
+     */
     public void setRaceFinished(boolean raceFinished) {
         this.raceFinished = raceFinished;
     }
