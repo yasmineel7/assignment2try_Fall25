@@ -54,7 +54,7 @@ import javax.sound.sampled.Clip;
  */
     public class MarathonController implements Initializable {
 
-  @FXML
+    @FXML
     private Label distanceLabel, runnerLabel, greetingLabel;
 
     @FXML
@@ -68,12 +68,9 @@ import javax.sound.sampled.Clip;
 
     @FXML
     private Button playPauseButton, pauseButton, exitButton;
-    
-     @FXML
-    private ImageView endRace;
      
      @FXML
-     private ImageView runnerMoving1, runnerMoving2, runnerMoving3, runnerMoving4, runnerMoving5, marathoners;
+     private ImageView runnerMoving1, runnerMoving2, runnerMoving3, runnerMoving4, runnerMoving5, marathoners, endRace;
       
       @FXML
     private TextArea textArea;
@@ -140,6 +137,7 @@ import javax.sound.sampled.Clip;
        pause.play();
        initializeModel();
        initializeRunner();
+       slideTransition();
       // exitButton.toFront();
       
     }
@@ -176,37 +174,33 @@ import javax.sound.sampled.Clip;
       */
      public void runnerMoving1() {
           path1 = new PathTransition(Duration.millis(4500), firstLine, runnerMoving1);
-         path1.play();
-//      List<ImageView> views = List.of(runnerMoving1, runnerMoving2, runnerMoving3, runnerMoving4, runnerMoving5);
-//      List<Line> paths = List.of(firstLine, secondLine, thirdLine, fourthLine, fifthLine);
-////      
-//      for (int i = 0; i < views.size(); i++) {
-//          PathTransition path = new PathTransition();
-//          path.setPath(paths.get(i));
-//          path.setNode(views.get(i));
-//      
-////      
-//      Runner r = raceRunner.getRunners().get(i);
-////      
-//      double baseDuration = 10000;
-//      double timeRace = baseDuration / r.getBaseSpeed();
-////      
-//      path.setDuration(Duration.millis(timeRace));
-//      path.setCycleCount(1);
-//      path.setAutoReverse(false);
-////      
-//     int y = i;
-////      
-//      path.setOnFinished(e -> {
-//          Runner runner = raceRunner.getRunners().get(y);
-//          endRace(runner);
-//      });
-////      
-//      pathTransitions.add(path);
-//       }
-
-         
-  
+          path1.play();
+      List<ImageView> views = List.of(runnerMoving1, runnerMoving2, runnerMoving3, runnerMoving4, runnerMoving5);
+      List<Line> paths = List.of(firstLine, secondLine, thirdLine, fourthLine, fifthLine);
+      
+      for (int i = 0; i < views.size(); i++) {
+          PathTransition path = new PathTransition();
+          path.setPath(paths.get(i));
+          path.setNode(views.get(i));
+            
+      Runner r = raceRunner.getRunners().get(i);
+      
+      double baseDuration = 10000;
+     double timeRace = baseDuration / r.getBaseSpeed();
+      
+      path.setDuration(Duration.millis(timeRace));
+      path.setCycleCount(1);
+      path.setAutoReverse(false);
+      
+     int y = i;
+      
+      path.setOnFinished(e -> {
+          Runner runner = raceRunner.getRunners().get(y);
+          endRace(runner);
+      });
+      
+      pathTransitions.add(path);
+      }
      }
      
      @FXML
