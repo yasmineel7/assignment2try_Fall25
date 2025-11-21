@@ -32,7 +32,6 @@ public class ModelRunner {
         
     }
     
-
     public void initializeRunners() {
       runners.add(new Runner("John", 1, 3.5, "/images/1.png"));
       runners.add(new Runner("Alex", 2, 3, "/images/2.png"));

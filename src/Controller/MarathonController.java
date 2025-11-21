@@ -150,7 +150,7 @@ import javafx.util.Duration;
       * the path transition for the runner 1
       */
      public void runnerMoving1() {
-        path1 = new PathTransition(Duration.millis(5000), firstLine, runnerMoving1); //good
+        path1 = new PathTransition(Duration.millis(5000), firstLine, runnerMoving1); 
         pathTransitions.add(path1);
      }
      
@@ -158,7 +158,7 @@ import javafx.util.Duration;
       * the path transition for the runner 2
       */
      public void runnerMoving2() {
-         path2 = new PathTransition(Duration.millis(8000), seventhLine, runnerMoving2); //good
+         path2 = new PathTransition(Duration.millis(8000), seventhLine, runnerMoving2); 
          pathTransitions.add(path2);
      }
      
@@ -166,7 +166,7 @@ import javafx.util.Duration;
       * the path transition for the runner 3
       */
      public void runnerMoving3() {
-         path3 = new PathTransition(Duration.millis(4500), thirdLine, runnerMoving3); //good
+         path3 = new PathTransition(Duration.millis(4500), thirdLine, runnerMoving3); 
          pathTransitions.add(path3);
      }
      
